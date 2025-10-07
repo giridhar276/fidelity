@@ -1,0 +1,294 @@
+
+C - datatypes
+----
+int a = 10 ;
+float
+char
+double
+long
+short
+
+python - objects
+------
+Everything in python is object.
+Every object contains methods.
+
+
+
+number
+-------
+number can be integer or decimal or octal or hexa.
+a = 10
+aval = 34.43
+
+string
+---------
+string is defined in single or double or triple quotes.
+
+aname = 'python programming'
+bname = "java programming"
+cname = """unix programming"""
+
+
+
+
+list ( array in C)
+-------------------
+list contains set of elements.
+Elements can be numbers or strings or any combination.
+list is defined in [].
+
+
+alist = [10,20,30,40]
+blist = ["java","oracle"]
+clist = [["ram",30],["rita",40]] # list of lists
+dlist = [10,"java",[30,40,50]]
+
+
+
+tuple  ( immutable readonly uneditable)
+--------
+tuple also contains set of elements. 
+tuple is defined in ().
+elements can be set of numbers or strings or any combination.
+Elements inside tuple cannot be modified directly
+
+
+atup = (10,20,30,40)
+btup = ("java","oracle")
+
+# list of lists
+empdb = [["ram",'2-2,90',"UK"],["rita","3-3-93']]
+
+# list of tuples
+empdb = [("ram",'2-2,90',"UK),("rita","3-3-93')]
+
+
+
+dictionary   (  json  hashmap   hash  pairs  items associativearray )
+-----------
+dictionary contains keys and values.
+key can be either number or string to identify the value.
+value can be number or string or list or tuple or dict
+
+syntax:    object = {key:value , key:value , key:value }
+example:    book  = {"chap1": 10 ,"chap2": 20}
+             data = {1:2,3:4,5:6}
+         book  = {"chap1": ["gita","UK"] ,"chap2": ['sita','US']}
+
+
+
+Index 
+------
+chap1  10 
+chap2  20
+chap3  30
+chap4  30
+
+
+
+
+set  ( venn diagrams)
+----
+set is UNORDERED collection of UNIQUE elements of SAME type.
+set is defined in {}.
+
+
+aset = {10,10,20,20,20,30}
+
+
+
+
+
+
+
+ conditions 
+ -----------
+ if 
+ if-else 
+ if-elif-elif-elif-elif-else
+
+
+
+ if ( 1 < 2 )
+ {
+
+ }
+
+
+ for only C 
+ -----------
+ for ( i = 0 ; i <=10 ; i++)
+ {
+
+ }
+
+
+file handling 
+---------------
+read mode  ( r )
+write mode  ( w )
+append mode  ( a )
+
+
+opening the file 
+---------------
+
+syntax:  object = open(filename , mode)
+example:   fr   = open("customers.txt","r")
+
+           fw   = open("customers.txt","w")
+           case1: If file doesnt exist.. file gets created first
+           case2: if file is already existing.. it ovrewrites
+           
+           
+           fa   = open("customers.txt","a")
+           case1: If file doesnt exist.. file gets created first
+           case2: if file is already existing.. it appends new content
+
+
+closing the file 
+----------
+fr.close()
+
+
+
+read operation 
+------------
+1. reading the file line by line 
+2. fobj.readlines()
+3. fobj.read()
+4. using csv library( for csv files) , json library( json files)
+5. using pandas library
+
+
+write operation 
+-----------
+1. fobj.write(string)
+2. fobj.writelines()
+3. using csv library
+4. using pandas library
+
+
+
+
+
+
+
+
+
+
+
+exception handling 
+------------------
+There are 2 types of errors.
+
+1. syntax error 
+2. semantic eror or runtime error or logical error.
+
+
+Handling errors that occurs during runtime is known as 
+exception handling.
+
+try 
+except 
+else 
+finally
+raise 
+
+
+
+
+
+function | definition | block | subroutine 
+------------------------------------------
+
+builtin functions 
+
+
+user defined functions 
+
+
+Where to check all the list of builtin functions?
+
+print(dir(__builtins__))
+
+builtin functions 
+--------------
+print() 
+len()
+range()
+type()
+isinstance()
+max()
+id()
+min()
+sum()
+
+
+
+str()
+int()
+list()
+oct()
+tuple()
+dict()
+set()
+
+
+
+
+
+user defined function | definition 
+-------------------------------------
+
+
+
+
+
+C
+--
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+#include<time.H>
+#include<datetime.h>
+#include<string.h>
+#include<graphics.h>
+#include<stdmanip.h>
+
+
+
+python 
+------
+
+
+
+requirement =   core programming  + libraries + domain
+                ( procedural/oop)
+
+
+1. builtin libraries 
+--------------------
+when python is installed, it is installed with 3000+ libraries
+
+
+
+2. third party libraries 
+------------------------
+Depending on your requirement developer has to install 
+third party library from www.pypi.org using pip tool.
+
+requirement
+-----------
+cloud automation
+analytics 
+ML/DL/Gen AI 
+web scrapping 
+develop web apps 
+testing 
+
+
+pip install <libraryname>
+
+
