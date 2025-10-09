@@ -15,6 +15,7 @@ with open("info.txt","r") as fobj:
 # method4
 import csv
 with open("info.txt","r") as fobj:
+    # converting fobj to csv understandable format
     reader = csv.reader(fobj)
     for line in reader:
         print(line)

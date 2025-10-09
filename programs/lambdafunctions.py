@@ -30,16 +30,26 @@ print(add(3, 5))  # 8
 
 # 2. Square of a number
 square = lambda x: x ** 2
-print(square(4))  # 16
+print(square(4))  
+
+
+
+
 
 # 3. Length of a string
 length = lambda s: len(s)
 print(length("python"))  # 6
 
 
+
+
+
+
 # 4. Multiply three numbers
 mul = lambda a, b, c: a * b * c
 print(mul(2, 3, 4))  # 24
+
+
 
 
 # 5. Convert to uppercase
@@ -50,6 +60,8 @@ print(upper("hello"))  # HELLO
 # 6. Reverse string
 reverse = lambda s: s[::-1]
 print(reverse("lambda"))  # adbmal
+
+
 
 
 

@@ -1,0 +1,372 @@
+
+
+1) Double Hours (2x)
+   - Columns: Age
+   - Rows: Double Hours (2x) [Python calc]
+   - Color: Hours Per Week
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+s = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+res = 2.0 * s
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Hours Per Week])
+)
+
+
+---------------------------------------------------------------------------
+
+2) Safe Ratio: Hours/Edu
+   - Columns: Educational Num
+   - Rows: Safe Ratio Hours per Edu [Python]
+   - Color: Age
+
+
+SCRIPT_REAL(
+"
+import pandas as pd, numpy as np
+h = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+e = pd.to_numeric(pd.Series(_arg2), errors='coerce').replace(0, np.nan)
+res = h / e
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Hours Per Week]), ATTR([Educational Num])
+)
+
+---------------------------------------------------------------------------
+
+3) Net Capital (Gain-Loss)
+   - Columns: Capital Gain
+   - Rows: Net Capital [Python]
+   - Color: Capital Loss
+
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+g = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+l = pd.to_numeric(pd.Series(_arg2), errors='coerce')
+res = g - l
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Capital Gain]), ATTR([Capital Loss])
+)
+
+---------------------------------------------------------------------------
+4) Net Capital per Hour
+   - Columns: Hours Per Week
+   - Rows: Net Capital per Hour [Python]
+   - Color: Capital Gain
+
+SCRIPT_REAL(
+"
+import pandas as pd, numpy as np
+g = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+l = pd.to_numeric(pd.Series(_arg2), errors='coerce')
+h = pd.to_numeric(pd.Series(_arg3), errors='coerce').replace(0, np.nan)
+res = (g - l) / h
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Capital Gain]), ATTR([Capital Loss]), ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+5) Centered Hours (H-40)
+   - Columns: Hours Per Week
+   - Rows: Centered Hours [Python]
+   - Color: Age
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+s = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+res = s - 40.0
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+6) Clamped Hours [0,80]
+   - Columns: Hours Per Week
+   - Rows: Clamped Hours [Python]
+   - Color: Educational Num
+
+SCRIPT_REAL(
+"
+import pandas as pd
+s = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+res = s.clip(lower=0.0, upper=80.0)
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+7) High Hours Flag (>45)
+   - Columns: Hours Per Week
+   - Rows: High Hours Flag [Python]
+   - Color: High Hours Flag [Python]
+
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+s = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+res = (s > 45.0).astype('float')
+res = res.where(~s.isna(), other=pd.NA)
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+8) Simple Linear Score (Age, Edu, Hrs)
+   - Columns: Age
+   - Rows: Simple Linear Score [Python]
+   - Color: Hours Per Week
+
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+age = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+edu = pd.to_numeric(pd.Series(_arg2), errors='coerce')
+hrs = pd.to_numeric(pd.Series(_arg3), errors='coerce')
+res = 0.2*age + 0.3*edu + 0.1*hrs
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Age]), ATTR([Educational Num]), ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+9) MinMax Normalize Hours
+   - Columns: Age
+   - Rows: MinMax Normalize Hours [Python]
+   - Color: MinMax Normalize Hours [Python]
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+s = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+vmin = s.min(skipna=True)
+vmax = s.max(skipna=True)
+if pd.isna(vmin) or pd.isna(vmax) or vmin == vmax:
+    return [None] * len(s)
+res = (s - vmin) / (vmax - vmin)
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+10) Simple Average (Age, Edu, Hrs)
+   - Columns: Educational Num
+   - Rows: Simple Average [Python]
+   - Color: Age
+
+
+SCRIPT_REAL(
+"
+import pandas as pd
+age = pd.to_numeric(pd.Series(_arg1), errors='coerce')
+edu = pd.to_numeric(pd.Series(_arg2), errors='coerce')
+hrs = pd.to_numeric(pd.Series(_arg3), errors='coerce')
+res = (age + edu + hrs) / 3.0
+return [None if pd.isna(v) else float(v) for v in res]
+",
+ATTR([Age]), ATTR([Educational Num]), ATTR([Hours Per Week])
+)
+
+---------------------------------------------------------------------------
+
+
+11) Day of Week (Mon=1 … Sun=7)
+   - Columns: Day of Week (Python)
+   - Rows: Record ID (CNT)
+   - Color: Day of Week (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+d = pd.to_datetime(pd.Series(_arg1), errors='coerce')
+w = d.dt.isocalendar().day
+out = []
+for v in w:
+    if pd.isna(v):
+        out.append(None)
+    else:
+        out.append(float(v))
+return out
+",
+ATTR([Date])
+)
+
+---------------------------------------------------------------------------
+
+12) Weekend Flag (Sat/Sun → 1, else 0)
+   - Columns: Date
+   - Rows: Weekend Flag (Python)
+   - Color: Weekend Flag (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+d = pd.to_datetime(pd.Series(_arg1), errors='coerce')
+dow = d.dt.weekday
+flag = (dow >= 5).astype('float')
+flag = flag.where(~d.isna(), other=pd.NA)
+return [None if pd.isna(v) else float(v) for v in flag]
+",
+ATTR([Date])
+)
+
+---------------------------------------------------------------------------
+
+13) Hour of Day (0–23)
+   - Columns: Hour of Day (Python)
+   - Rows: Record ID (CNT)
+   - Color: Hour of Day (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+t = pd.to_datetime(pd.Series(_arg1), errors='coerce', format='%H:%M:%S')
+hour = t.dt.hour
+out = []
+for v in hour:
+    if pd.isna(v):
+        out.append(None)
+    else:
+        out.append(float(v))
+return out
+",
+ATTR([Time])
+)
+
+---------------------------------------------------------------------------
+
+14) Seconds Since Midnight (0–86399)
+   - Columns: Seconds Since Midnight (Python)
+   - Rows: Record ID (CNT)
+   - Color: Seconds Since Midnight (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+t = pd.to_datetime(pd.Series(_arg1), errors='coerce', format='%H:%M:%S')
+sec = (t.dt.hour * 3600 + t.dt.minute * 60 + t.dt.second).astype('float')
+sec = sec.where(~t.isna(), other=pd.NA)
+return [None if pd.isna(v) else float(v) for v in sec]
+",
+ATTR([Time])
+)
+
+---------------------------------------------------------------------------
+
+15) Days Since Min Date (in view)
+   - Columns: Days Since Min Date (Python)
+   - Rows: Hours Per Week
+   - Color: Days Since Min Date (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+d = pd.to_datetime(pd.Series(_arg1), errors='coerce')
+dmin = d.min(skipna=True)
+if pd.isna(dmin):
+    return [None] * len(d)
+delta = (d - dmin).dt.days
+out = []
+for v in delta:
+    if pd.isna(v):
+        out.append(None)
+    else:
+        out.append(float(v))
+return out
+",
+ATTR([Date])
+)
+
+---------------------------------------------------------------------------
+
+16) Shift Code from Time (Night=0, Morning=1, Afternoon=2, Evening=3)
+   - Columns: Time
+   - Rows: Shift Code (Python)
+   - Color: Shift Code (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+import numpy as np
+t = pd.to_datetime(pd.Series(_arg1), errors='coerce', format='%H:%M:%S')
+h = t.dt.hour.astype('float')
+bins = [0, 6, 12, 18, 24]
+labels = [0.0, 1.0, 2.0, 3.0]
+shift = pd.cut(h, bins=bins, right=False, labels=labels).astype('float')
+return [None if pd.isna(v) else float(v) for v in shift]
+",
+ATTR([Time])
+)
+
+---------------------------------------------------------------------------
+
+17) Month Number (1–12)
+   - Columns: Month (Python)
+   - Rows: Record ID (CNT)
+   - Color: Month (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+d = pd.to_datetime(pd.Series(_arg1), errors='coerce')
+m = d.dt.month
+out = []
+for v in m:
+    if pd.isna(v):
+        out.append(None)
+    else:
+        out.append(float(v))
+return out
+",
+ATTR([Date])
+)
+
+---------------------------------------------------------------------------
+
+18) Day-of-Month Normalized (0–1)
+   - Columns: Date
+   - Rows: DOM Normalized (Python)
+   - Color: DOM Normalized (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+d = pd.to_datetime(pd.Series(_arg1), errors='coerce')
+dom  = d.dt.day
+mlen = d.dt.days_in_month
+norm = (dom - 1) / (mlen - 1)
+out = []
+for v, dv in zip(norm, d):
+    if pd.isna(dv) or pd.isna(v):
+        out.append(None)
+    else:
+        out.append(float(v))
+return out
+",
+ATTR([Date])
+)

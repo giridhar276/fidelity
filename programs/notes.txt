@@ -292,3 +292,139 @@ testing
 pip install <libraryname>
 
 
+
+
+
+database   python library
+--------    ---------------
+Oracle        cx_Oracle
+mysql         pymysql
+MongoDB       pymysql 
+SQL Server    pymssql 
+IBM DB2       db2 
+AWS CLoud     boto3 
+tableau       tabpy 
+azure         azure
+
+
+password for mysql :  admin@123
+
+step0: display all  avaiable databases 
+---------------------------
+show databases;
+
+
+step1: create your database 
+---------------------------
+create database empdb;
+
+
+step2:  access your database 
+-----------------------
+use empdb;
+
+step3: create table 
+--------------------
+CREATE TABLE employee (
+  age INT,
+  workclass VARCHAR(64),
+  fnlwgt INT,
+  education VARCHAR(64),
+  educational_num INT,
+  marital_status VARCHAR(64),
+  occupation VARCHAR(64),
+  relationship VARCHAR(64),
+  race VARCHAR(64),
+  gender VARCHAR(16),
+  capital_gain INT,
+  capital_loss INT,
+  hours_per_week INT,
+  native_country VARCHAR(64),
+  income VARCHAR(16)
+);
+
+
+
+step1:  connect to database 
+step2:  create cursor ( handler)
+step3:  define query
+step4: execute query
+step5:  fetch the output
+step6:  close the connection
+
+
+
+
+
+
+
+
+
+
+
+
+
+python has 2 different extension 
+
+hello.py 
+
+
+
+hello.ipynb ( interactive python notebook  OR jupyter notebooks OR notebook)
+
+
+
+
+virtual environments
+--------------------
+
+There are 3 ways of creating virutal environments
+
+
+1. venv   ( buildin library )
+
+2. conda tool ( installed with anaconda)
+
+3. virutalenv
+
+using venv
+-----------
+In the termianl
+# syntax: python -m venv  <yourenvname>
+
+python -m venv myenv
+
+
+
+step1:  create virtual environment
+-----------------------------------
+python -m venv myenv1
+
+
+step2:  activate your environment
+-------------------------------------
+ .\myenv1\Scripts\activate
+
+
+step3 : deactivate
+-----------------
+deactivate  ( it moves to global python)
+
+
+
+
+
+backend programming 
+-------------------------
+ db programming 
+  rest api 
+  data processing
+
+
+UI programming 
+--------------
+flask library 
+django library 
+bottle library
+
+streamlit 
