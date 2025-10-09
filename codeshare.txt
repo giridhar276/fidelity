@@ -1,0 +1,1149 @@
+
+
+
+
+############################################
+https://github.com/giridhar276/fidelity
+###########################################
+
+########## list methods ########
+alist = [10,3,56,2,63,82,47,84]
+alist.append(49)
+print("After appending:", alist)
+# list.extend(iterable) - adding multiple values
+alist.extend([58,29,43])
+print("After extending:",alist)
+# list.insert(where,what)  #l.insert(index,value)
+alist.insert(1,200)
+print("After inserting:",alist)
+# list.pop(index)
+alist.pop(0)  # 0 is the index
+print("After pop operation:",alist)
+# list.remove(value)
+alist.remove(100)
+print("AFter removing :",alist)
+# list.reverse()
+alist.reverse()
+print("after reversing:",alist)
+# list.sort()
+alist.sort()
+print("After sorting:",alist)
+
+
+
+
+
+##### dictionary mthods  #########
+
+book = {"chap1":10 ,"chap2":20 , "chap3":30, "chap1":100}
+print(book)
+# add new key-value to the dictionary
+book["chap4"] = 40
+book["chap5"] = 50
+book["chap6"] = 60
+print(book)
+
+# display individual value
+print(book["chap1"]) # 100
+print(book["chap2"]) # 20
+
+## display keys
+print(book.keys())
+
+# display keys line by line
+for k in book.keys():
+    print(k)
+
+for k in book:
+    print(k)      # key
+    print(book[k]) # value
+
+##### display values
+print(book.values())
+
+
+for v in book.values():
+    print(v)
+
+#### dislay key,value at a time
+
+print(book.items())
+
+for item in book.items():
+    print(item)
+
+for k,v in book.items():
+    print(k,v)
+
+
+# remove key-value from dictionary
+book.pop("chap1")  # chap1-10 will be removed from dictionary
+print("After pop operation:", book)
+book.pop("chap2")
+print("After pop operation:", book)
+book.popitem()   # remove last inserted key-value from dictionary
+print(book)
+
+# combining two dictionaries
+book = {"chap1":10, "chap2":20}
+newbook = {"chap3":30 , "chap4":40}
+# method1
+finalbook = {**book,**newbook}
+print(finalbook)
+#method2
+book.update(newbook)   # book is getting updated
+print(book)
+print(newbook)
+
+
+###### dictionary example
+
+
+data = {
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}
+
+
+#Standard Generalized Markup Language
+print(data['glossary']['GlossDiv']['GlossList']['GlossEntry']['GlossTerm'])
+
+
+# XML
+print(data['glossary']['GlossDiv']['GlossList']['GlossEntry']['GlossDef']['GlossSeeAlso'][1])
+
+
+# XML
+
+
+
+
+
+
+################################# dictionary tasks #######################
+
+
+
+colors = [
+{
+"colors": "red",
+"values": "#f00"
+},
+{
+"colors": "green",
+"values": "#0f0"
+},
+{
+"colors": "blue",
+"values": "#00f"
+},
+{
+"colors": "cyan",
+"values": "#0ff"
+},
+{
+"colors": "magenta",
+"values": "#f0f"
+},
+{
+"colors": "yellow",
+"values": "#ff0"
+},
+{
+"colors": "black",
+"values": "#000"
+}
+]
+
+write a program to display all the colors and its values.
+
+sample output :
+
+red #f00
+green #0f0
+yellow  #ff0
+magenta #f0f
+..
+..
+..
+
+
+
+for item in  colors:
+    print(item['colors'] , item['values'])
+
+print("---------------------------")
+for item in  colors:
+    data = list(item.values())
+    print(data[0], data[1])
+
+
+##########################################################################
+
+Write a program to display all employee names and their departments.
+
+employees = {
+    "E001": {"name": "Alice", "department": "Finance"},
+    "E002": {"name": "Bob", "department": "IT"},
+    "E003": {"name": "Charlie", "department": "HR"}
+}
+
+
+sample output:
+
+Alice  Finance
+Bob    IT
+..
+..
+
+
+
+
+for item in employees.values():
+    print(item['name'], item['department'])
+
+
+for key,value in employees.items():
+    print(value['name'], value['department'])
+
+
+for key in employees:
+    print(employees[key]["name"] , employees[key]["department"])
+
+
+##########################################################################
+
+Write a program to print all product names and prices.
+
+products = [
+    {"id": 101, "name": "Laptop", "price": 75000},
+    {"id": 102, "name": "Mobile", "price": 25000},
+    {"id": 103, "name": "Tablet", "price": 15000}
+]
+
+
+for item in products:
+    print(item['name'] , item['price'])
+
+##########################################################################
+
+
+Write a program to print team names and player names.
+
+teams = {
+    "TeamA": [
+        {"name": "Alice", "role": "Batsman"},
+        {"name": "Bob", "role": "Bowler"}
+    ],
+    "TeamB": [
+        {"name": "Charlie", "role": "Allrounder"},
+        {"name": "Dave", "role": "Wicketkeeper"}
+    ]
+}
+
+
+sample output:
+
+TeamA
+-----
+Alice
+Bob
+
+TeamB
+-----
+Charlie
+Dave
+
+
+
+
+for key,value in teams.items():
+    print(key)
+    print("----")
+    for item in value:
+        print(item['name'])
+    print()
+
+################################################################
+
+data = {
+    'Sales': {
+        'North': {
+            'Alice': 'Manager',
+            'Bob': 'Sales Executive',
+            'Eve': 'Sales Coordinator',
+            'John': 'Account Manager'
+        },
+        'South': {
+            'Charlie': 'Sales Executive',
+            'Grace': 'Regional Sales Manager',
+            'Mallory': 'Business Development Associate'
+        },
+        'West': {
+            'Oscar': 'Sales Executive',
+            'Peggy': 'Account Executive',
+            'Victor': 'Territory Sales Manager'
+        }
+    },
+    'Marketing': {
+        'Digital': {
+            'David': 'SEO Specialist',
+            'Hannah': 'Content Strategist',
+            'Irene': 'Social Media Manager'
+        },
+        'Offline': {
+            'Eve': 'Event Coordinator',
+            'Jake': 'Brand Manager',
+            'Liam': 'Public Relations Specialist'
+        },
+        'Research': {
+            'Mia': 'Market Research Analyst',
+            'Noah': 'Customer Insights Manager'
+        }
+    },
+    'IT': {
+        'Infrastructure': {
+            'Quinn': 'Network Engineer',
+            'Riley': 'System Administrator',
+            'Sam': 'Cloud Architect'
+        },
+        'Development': {
+            'Tina': 'Software Engineer',
+            'Uma': 'Backend Developer',
+            'Walter': 'Full Stack Developer'
+        }
+    },
+    'HR': {
+        'Recruitment': {
+            'Yara': 'Recruitment Specialist',
+            'Zane': 'Talent Acquisition Manager',
+            'Nina': 'HR Coordinator'
+        },
+        'Employee Relations': {
+            'Oliver': 'Employee Relations Specialist',
+            'Sophia': 'HR Business Partner'
+        }
+    },
+    'Finance': {
+        'Accounting': {
+            'Xander': 'Accountant',
+            'Yvette': 'Accounts Payable Specialist',
+            'Zara': 'Financial Analyst'
+        },
+        'Audit': {
+            'Luna': 'Internal Auditor',
+            'Mason': 'Compliance Officer'
+        }
+    }
+}
+
+
+write a program to display the below output:
+
+
+Sales
+-----
+North
+South
+West
+
+
+Marketing
+--------
+Digital
+Offline
+Research
+
+
+IT
+---
+Infrasturcture
+Development
+
+HR
+---
+Recruitment
+Employee Relations
+
+
+
+
+
+
+for key,value in data.items():
+    print(key)
+    print("------")
+    for skey in value:
+        print(skey)
+    print()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+#fobj = open("C:\\info.txt","w")
+fobj = open("info.txt","w")
+
+fobj.write("python\n")
+fobj.write("unix\n")
+fobj.writelines(["unix","java","oracle\n"])
+
+
+for val in range(1,10):
+    fobj.write( str(val) + "\n")
+
+
+fobj.close()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+# pythonic way # modern way
+# context manager
+# file is closed automatically when it is out of context
+
+with open("info.txt","w") as fobj:
+    # fobj.write(string)
+    fobj.write("python\n")
+    fobj.write("unix\n")
+    # fobj.writlines(list)
+    fobj.writelines(["unix","java","oracle\n"])
+    for val in range(1,10):
+        fobj.write( str(val) + "\n")
+    print(fobj.closed )
+print(fobj.closed )
+
+
+
+
+
+
+
+
+
+
+try:
+    fobj = open("customers.txt","r")
+    print(fobj.read())
+    fobj.close()
+except Exception as e:      # Default exception or base class Exception
+    print(e)
+    print("file is not found")
+########################################################
+try:
+    fobj = open("customers.txt","r")
+    print(fobj.read())
+    fobj.close()
+except TypeError as err:
+    print("Invalid operation")
+except ValueError as err:
+    print("Invalid input")
+except (IndexError,KeyError) as err:
+    print("Invalid key or invalid index")
+except Exception as err:
+    print(err)
+    print("file is not found")
+    
+    
+    
+    
+    
+    
+    
+    
+# fobj acts like cursor
+# method1  ---> reading line by line
+with open("info.txt","r") as fobj:
+    for line in fobj:
+        print(line.strip())
+    
+# method2 ----> output in list
+with open("info.txt","r") as fobj:
+    print(fobj.readlines())   # output in list
+
+# method3   ----> output in string
+with open("info.txt","r") as fobj:
+    print(fobj.read())
+
+# method4
+import csv
+with open("info.txt","r") as fobj:
+    reader = csv.reader(fobj)
+    for line in reader:
+        print(line)
+
+# method5
+import pandas
+df = pandas.read_csv("info.txt")
+print(df)
+
+
+
+
+
+
+
+
+
+##### display all the builtin functions and exceptions
+print(dir(__builtins__))
+alist = [10,20,30]
+print(len(alist))  # length of the list
+print(max(alist))  # largest number
+print(min(alist))  # smallest number
+print(sum(alist))  # sum of the list
+print(id(alist))   # unique reference
+print(type(alist)) # type of the object
+print(isinstance(alist,str))  # validate teh object
+print(isinstance(alist,list))
+
+
+
+
+
+
+
+# Every OS contains set of processses that keep runing
+# Every process contains system calls.
+
+# regular way # traditionl way
+# function body
+def display(a,b):
+    c = a + b
+    return c
+
+# calling function
+total = display(10,20)
+print(total)
+
+
+
+
+
+
+## #lambda function
+# lambda is the repalcement of single liner function
+#functioname = lambda variables : expression
+display = lambda a,b: a + b
+total = display(10,20)
+print(total)
+
+toupper = lambda name : name.upper()
+output = toupper("python")
+print(output)
+
+exam = lambda marks : "fail" if marks < 35 else "pass"
+test = exam(30)
+print(test)
+
+
+
+
+
+
+# 2. Square of a number
+square = lambda x: x ** 2
+print(square(4))  
+
+
+
+
+
+
+
+
+
+
+
+# 3. Length of a string
+length = lambda s: len(s)
+print(length("python"))  # 6
+
+
+
+
+
+# 4. Multiply three numbers
+mul = lambda a, b, c: a * b * c
+print(mul(2, 3, 4))  # 24
+
+
+
+
+# 5. Convert to uppercase
+upper = lambda s: s.upper()
+print(upper("hello"))  # HELLO
+
+
+
+
+
+
+# 6. Reverse string
+reverse = lambda s: s[::-1]
+print(reverse("lambda"))  # adbmal
+
+
+
+
+
+
+
+
+# 1. Max of two numbers
+maximum = lambda a, b: a if a > b else b
+print(maximum(10, 20))  # 20
+
+
+
+
+# 2. Pass or Fail
+result = lambda marks: "Pass" if marks >= 35 else "Fail"
+print(result(30))  # Fail
+
+
+
+
+# 3. Even or Odd
+even_odd = lambda x: "Even" if x % 2 == 0 else "Odd"
+print(even_odd(9))  # Odd
+
+
+
+# 4. Positive, Negative or Zero
+sign = lambda x: "Positive" if x > 0 else "Negative" if x < 0 else "Zero"
+print(sign(-5))  # Negative
+
+
+
+
+# 5. Grade categorization
+grade = lambda m: 'A' if m >= 90 else 'B' if m >= 75 else 'C'
+print(grade(80))  # B
+
+
+# 6. Adult or Minor
+age_check = lambda age: "Adult" if age >= 18 else "Minor"
+print(age_check(17))  # Minor
+
+# 7. Number is multiple of 3
+multiple_of_3 = lambda x: "Yes" if x % 3 == 0 else "No"
+print(multiple_of_3(9))  # Yes
+
+# 8. Leap year check
+leap_year = lambda y: "Leap" if (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0) else "Not Leap"
+print(leap_year(2020))  # Leap
+
+# 9. Compare lengths
+compare_len = lambda a, b: "Equal" if len(a) == len(b) else "Not Equal"
+print(compare_len("hi", "by"))  # Equal
+
+# 10. Password strength
+password_check = lambda pwd: "Strong" if len(pwd) >= 8 else "Weak"
+print(password_check("pass123"))  # Weak
+
+
+
+
+######## using map()
+
+#Convert to strings
+nums = [1, 2, 3, 4, 5]
+to_str = list(map(lambda x: str(x), nums))
+print(to_str)  # ['1', '2', '3', '4', '5']
+
+
+#Convert floats to ints
+floats = [2.5, 3.6, 4.1]
+ints = list(map(lambda x: int(x), floats))
+print(ints)  # [2, 3, 4]
+
+
+
+#Uppercase names
+names = ["alice", "bob", "carol"]
+upper_names = list(map(lambda x: x.upper(), names))
+print(upper_names)  # ['ALICE', 'BOB', 'CAROL']
+
+
+
+#Extract domain from email
+emails = ["user1@gmail.com", "user2@yahoo.com"]
+domains = list(map(lambda x: x.split("@")[1], emails))
+print(domains)
+
+
+names = ["Alice", "Bob"]
+greeted = list(map(lambda x: "Mr./Ms. " + x, names))
+print(greeted)
+
+
+
+
+################# mysql #####################
+
+
+step0: display all  avaiable databases 
+---------------------------
+show databases;
+
+
+step1: create your database 
+---------------------------
+create database empdb;
+
+
+step2:  access your database 
+-----------------------
+use empdb;
+
+step3: create table 
+--------------------
+CREATE TABLE employee (
+  age INT,
+  workclass VARCHAR(64),
+  fnlwgt INT,
+  education VARCHAR(64),
+  educational_num INT,
+  marital_status VARCHAR(64),
+  occupation VARCHAR(64),
+  relationship VARCHAR(64),
+  race VARCHAR(64),
+  gender VARCHAR(16),
+  capital_gain INT,
+  capital_loss INT,
+  hours_per_week INT,
+  native_country VARCHAR(64),
+  income VARCHAR(16)
+);
+
+
+step4:
+--------
+select * from employeee;
+
+conn=pymysql.connect(host="localhost",port=3306,user="root",password="admin@123")
+print(conn)
+
+https://github.com/giridhar276/fidelity/blob/main/employee.csv
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# pip install pymysql  ( if libary not installed)
+import pymysql
+import csv
+# step1
+conn = pymysql.connect(host="localhost",port=3306,user="root",password="admin@123")
+print(conn)
+# step2
+cursor = conn.cursor()
+# step3
+with open("employee.csv","r") as fobj:
+    header = fobj.readline()  # reading 1st line which is header
+    reader = csv.reader(fobj)
+    for line in reader:
+        print(line)
+        query = "insert into empdb.employee values({},'{}',{},'{}',{},'{}','{}','{}','{}','{}',{},{},{},'{}','{}')".format(*line)
+        cursor.execute(query)
+    conn.commit()
+conn.close()
+
+
+
+
+
+examples:
+
+
+string = "I love {} and {}" # template
+print(string.format("bang","hyd"))
+print(string.format("python","java"))
+
+query = "insert into employee values('{}',{})"
+print(query.format(1,2))
+
+
+
+
+
+
+
+##################
+
+
+
+
+
+
+
+# pip install pymysql  ( if libary not installed)
+import pymysql
+import csv
+# step1
+conn = pymysql.connect(host="localhost",port=3306,user="root",password="admin@123")
+print(conn)
+# step2
+cursor = conn.cursor()
+# step3
+
+query = "select count(*) from empdb.employee"
+cursor.execute(query)
+print(cursor.fetchone())
+
+# step6
+conn.close()
+
+
+#######################################
+
+
+
+
+
+
+
+
+# pip install pymysql  ( if libary not installed)
+import pymysql
+import csv
+# step1
+conn = pymysql.connect(host="localhost",port=3306,user="root",password="admin@123")
+print(conn)
+# step2
+cursor = conn.cursor()
+# step3
+
+query = "select * from empdb.employee"
+cursor.execute(query)
+for record  in cursor.fetchall():
+    print(record)
+
+# step6
+conn.close()
+
+
+
+
+
+
+
+
+
+
+
+.env file 
+---------
+hostname=localhost
+port=3306
+user=root
+password=admin@123
+
+
+
+
+
+
+
+
+
+# pip install pymysql  ( if libary not installed)
+import pymysql
+import csv
+import os
+# step1
+hostname = os.environ.get('hostname')
+port = os.environ.get('port')
+username = os.environ.get('user')
+password = os.environ.get('password')
+
+
+conn = pymysql.connect(host=hostname,port=port,user='root',password='admin@123')
+# step2
+cursor = conn.cursor()
+# step3
+
+query = "select count(*) from empdb.employee"
+cursor.execute(query)
+for record  in cursor.fetchall():
+    print(record)
+
+# step6
+conn.close()
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+from sqlalchemy import create_engine
+from urllib.parse import quote_plus
+
+user = "root"
+password = quote_plus("admin@123")  # encodes '@'
+host = "localhost"
+port = 3306
+database = "empdb"
+
+engine = create_engine(f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}")
+pd.read_csv("employee.csv").to_sql("employee", con=engine, if_exists="append", index=False)
+print("Done.")
+
+
+################## using .env file ####################
+
+
+.env
+------
+hostname=localhost
+port=3306
+user=root
+password=admin@123
+
+
+
+#############   program ######################
+
+# pip install pymysql  ( if libary not installed)
+import pymysql
+import csv
+import os
+# pip install python-dotenv
+from dotenv import load_dotenv   ## pip install python-dotenv
+
+# load .env from current folder
+load_dotenv()
+
+# read values
+hostname = os.getenv("hostname")        #  localhost
+port = int(os.getenv("port") )          #  3306
+username = os.getenv("user")            #  root
+password = os.getenv("password")        #  admin@123
+
+
+conn = pymysql.connect(host=hostname,port=port,user=username,password=password)
+# step2
+cursor = conn.cursor()
+# step3
+
+query = "select count(*) from empdb.employee"
+cursor.execute(query)
+for record  in cursor.fetchall():
+    print(record)
+
+# step6
+conn.close()
+
+
+
+
+
+
+https://github.com/giridhar276/fidelity
+
+
+dpip install tabpy pantab
+
+set global local_infile = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import pandas as pd
+import pantab
+
+# 1) Load your CSV
+df = pd.read_csv("employee_100.csv")   # or "employee.csv"
+
+# (Optional) clean column names a bit
+df.columns = (
+    df.columns.str.strip().str.lower().str.replace(r"[^\w]+", "_", regex=True)
+)
+
+# 2) Write to Hyper
+# Table name can be just "employee" (schema defaults to Extract)
+pantab.frame_to_hyper(df, "employee1.hyper", table="employee", table_mode="w")
+print("Created employee.hyper")
+
+
+
+
+
+
+ Day of Week (Mon=1 … Sun=7)
+   - Columns: Day of Week (Python)
+   - Rows: Record ID (CNT)
+   - Color: Day of Week (Python)
+
+SCRIPT_REAL(
+"
+import pandas as pd
+d = pd.to_datetime(pd.Series(_arg1), errors='coerce')
+w = d.dt.isocalendar().day
+out = []
+for v in w:
+    if pd.isna(v):
+        out.append(None)
+    else:
+        out.append(float(v))
+return out
+",
+ATTR([Date])
+)
+
+
+
+
+
+
+
+
+
+
+ZRINJJH-KF54576
+http://10.215.62.216:8501
+
+
+netsh advfirewall firewall add rule name="Streamlit 8501" dir=in action=allow protocol=TCP localport=8501
+
+
+choco install cloudflared
+
+webiste: share.streamlit.io
+
+
+Other PaaS options: Render, Fly.io, Railway, Azure Web App, etc. (needs a small Procfile or Dockerfile).
+
+
+
+
+https://giridemoapp1.streamlit.app/
+
+
+
+step1: create streamlit account
+share.streamlit.io
+
+
+step2:  create github account
+www.github.com
+- open www.github.com
+- click New button
+- create repository with some meaningful name
+- upload any existing stremlit program
+
+
+
+
+portal.azure.com
+
+
+
+
+https://giridharsripathi.sharepoint.com/sites/training
+
+
+
+
+GiridharSripathi@GiridharSripathi.onmicrosoft.com
+
+password:  Nolimits1@
+
+
+
+
+pip install Office365-REST-Python-Client
+pip install msal
+
+
+
+
+
+https://www.microsoft.com/en-us/download/details.aspx?id=58494&msockid=3c863dbf4a4669aa25262bc54b62687a
+
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+df = df.drop_duplicates()
+
+# pandas processing
+df = df[df["age"] >= 30]
+
+plt.figure(figsize=(8,4))
+plt.hist(df["age"].dropna(), bins=20)
+plt.title("Age Distribution (Age ≥ 30)")
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.tight_layout()
+plt.show()
+
+
+
+
+
