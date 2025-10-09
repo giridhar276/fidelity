@@ -1,0 +1,229 @@
+10 Pandas-in-Power BI Visualization Examples (Python Visual)
+============================================================
+
+How to use:
+- In Power BI Desktop, add a Python visual.
+- Drag the relevant fields into the Values well.
+- Paste ONE of the scripts below into the Python script editor and run.
+- Each script assumes Power BI provides a dataframe named `dataset`.
+
+Assumed columns available (swap names if yours differ):
+age, capital_gain, capital_loss, education, educational_num, fnlwgt, gender, hours_per_week,
+income, marital_status, native_country, occupation, race, relationship, workclass
+
+------------------------------------------------------------
+1) Matplotlib — Filter + Histogram (Age ≥ 30)
+------------------------------------------------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+df = df.drop_duplicates()
+
+# pandas processing
+df = df[df["age"] >= 30]
+
+plt.figure(figsize=(8,4))
+plt.hist(df["age"].dropna(), bins=20)
+plt.title("Age Distribution (Age ≥ 30)")
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+2) Matplotlib — GroupBy mean + Bar: Avg Hours/Week by Gender
+------------------------------------------------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+df = df.drop_duplicates()
+
+# pandas processing
+avg_hours = (df.groupby("gender", as_index=False)["hours_per_week"]
+               .mean()
+               .sort_values("hours_per_week", ascending=False))
+
+plt.figure(figsize=(7,4))
+plt.bar(avg_hours["gender"].astype(str), avg_hours["hours_per_week"])
+plt.title("Average Hours/Week by Gender")
+plt.ylabel("Hours/Week")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+3) Matplotlib — Value Counts + Horizontal Bar: Top 10 Occupations
+------------------------------------------------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+
+# pandas processing
+top_occ = (df["occupation"]
+           .value_counts()
+           .head(10)
+           .sort_values(ascending=True))
+
+plt.figure(figsize=(9,5))
+plt.barh(top_occ.index.astype(str), top_occ.values)
+plt.title("Top 10 Occupations (Count)")
+plt.xlabel("Employees")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+4) Matplotlib — Crosstab + Stacked Bars: Income by Education (Top 10)
+------------------------------------------------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+
+# pandas processing
+ct = pd.crosstab(df["education"], df["income"]).fillna(0)
+ct = ct.loc[ct.sum(axis=1).sort_values(ascending=False).index[:10]]
+
+plt.figure(figsize=(11,6))
+bottom = None
+for col in ct.columns:
+    if bottom is None:
+        plt.bar(ct.index.astype(str), ct[col].values, label=str(col))
+        bottom = ct[col].values
+    else:
+        plt.bar(ct.index.astype(str), ct[col].values, bottom=bottom, label=str(col))
+        bottom = bottom + ct[col].values
+
+plt.xticks(rotation=45, ha="right")
+plt.title("Income Split by Education (Top 10)")
+plt.ylabel("Count")
+plt.legend(title="Income")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+5) Matplotlib — Clean + Scatter: Age vs Capital Gain (remove extreme outliers)
+------------------------------------------------------------
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+df = dataset.copy()
+
+# pandas processing: remove extreme outliers using z-score on capital_gain
+x = df["age"].astype(float)
+y = df["capital_gain"].astype(float)
+z = (y - y.mean()) / y.std(ddof=0)
+mask = z.abs() <= 3  # keep within 3 std
+x, y = x[mask], y[mask]
+
+plt.figure(figsize=(8,5))
+plt.scatter(x, y, s=16)
+plt.title("Age vs Capital Gain (Outliers Removed)")
+plt.xlabel("Age")
+plt.ylabel("Capital Gain")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+6) Seaborn — Countplot with Order: Marital Status
+------------------------------------------------------------
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+
+# pandas processing
+order = df["marital_status"].value_counts().index
+
+plt.figure(figsize=(10,4))
+sns.countplot(data=df, x="marital_status", order=order)
+plt.title("Marital Status Distribution")
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+7) Seaborn — Clip/Winsorize + Violin: Hours/Week by Income
+------------------------------------------------------------
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+
+# pandas processing: clip extreme hours to 5th–95th percentile
+low, high = df["hours_per_week"].quantile([0.05, 0.95])
+df["hours_per_week_clipped"] = df["hours_per_week"].clip(lower=low, upper=high)
+
+plt.figure(figsize=(8,5))
+sns.violinplot(data=df, x="income", y="hours_per_week_clipped", cut=0)
+plt.title("Hours per Week by Income (clipped 5–95%)")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+8) Seaborn — Transform + Hist/KDE: log1p(Capital Gain)
+------------------------------------------------------------
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+df = dataset.copy()
+
+# pandas processing: log1p transform to reduce skew
+df["capital_gain_log1p"] = np.log1p(df["capital_gain"].clip(lower=0))
+
+plt.figure(figsize=(8,5))
+sns.histplot(df["capital_gain_log1p"], kde=True, bins=30)
+plt.title("log1p(Capital Gain) Distribution with KDE")
+plt.xlabel("log1p(Capital Gain)")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+9) Seaborn — Select numeric + Correlation Heatmap
+------------------------------------------------------------
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+
+# pandas processing
+num = df.select_dtypes(include="number")
+corr = num.corr(numeric_only=True)
+
+plt.figure(figsize=(9,7))
+sns.heatmap(corr, annot=True, fmt=".2f", square=True)
+plt.title("Correlation Heatmap (Numeric Columns)")
+plt.tight_layout()
+plt.show()
+
+------------------------------------------------------------
+10) Seaborn — GroupBy mean + Bar (catplot): Avg Capital Gain by Education (Top 10)
+------------------------------------------------------------
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = dataset.copy()
+
+# pandas processing
+avg_gain = (df.groupby("education", as_index=False)["capital_gain"]
+              .mean()
+              .sort_values("capital_gain", ascending=False)
+              .head(10))
+
+sns.catplot(
+    data=avg_gain,
+    x="education", y="capital_gain",
+    kind="bar", height=4, aspect=2
+)
+plt.title("Average Capital Gain by Education (Top 10)")
+plt.xticks(rotation=45, ha="right")
+plt.tight_layout()
+plt.show()
