@@ -1,0 +1,8 @@
+
+pytesseract
+tesserocr
+easyocr
+paddleocr>=2.6
+python-doctr[torch]
+keras-ocr
+mmocr

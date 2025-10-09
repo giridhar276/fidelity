@@ -1,0 +1,16 @@
+---------------------------------
+first sign up in signup.snowflake.com
+-------------------------------
+
+-- 1) Create compute
+CREATE WAREHOUSE IF NOT EXISTS MY_WH
+  WITH WAREHOUSE_SIZE='XSMALL' AUTO_SUSPEND=60 AUTO_RESUME=TRUE;
+
+-- 2) Create database
+CREATE DATABASE IF NOT EXISTS MY_DB;
+
+-- 3) Set context (tell Snowflake which WH/DB/SCHEMA to use)
+USE WAREHOUSE MY_WH;
+USE DATABASE MY_DB;
+CREATE SCHEMA IF NOT EXISTS PUBLIC;  -- or: CREATE SCHEMA IF NOT EXISTS MY_DB.PUBLIC;
+USE SCHEMA PUBLIC;
